@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app" style="text-align: center">
+        <p v-bind:style="styleObj1">{{msg}}</p>
+        <input type="button" value="动起来" v-on:click="run" style="background-color: aqua;color:red; font-weight: bold; border-radius: 10px">
+        <input type="button" value="停下来" v-on:click="stop" style="background-color: aqua;color:rebeccapurple; font-weight: bold; border-radius: 10px">
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                styleObj1:{color:'red','font-weight':200,'font-size':'40px'},
+                msg: '我喜欢你，就像风走了八千里',
+                setIntervalId : null
+            },
+            methods: {
+                run() {
+                    var self = this
+                    // console.log('点击我啦');
+                    if (self.setIntervalId == null) {
+                        var setIntervalId = setInterval(() => {
+                            var start = self.msg.substring(0, 1)
+
+                            var end = self.msg.substring(1)
+                            var msg = end + start;
+                            self.msg = msg;
+                            let x = (Math.random()*255).toFixed(0),
+                                y = (Math.random()*255).toFixed(0),
+                                z = (Math.random()*255).toFixed(0);
+                                var color = [
+                                    'red','#993399','green','#999',
+                                    '#f7acbc','#deab8a','#817936','#7f7522'
+                                ]
+                                self.styleObj1.color = color[(Math.random()*7   ).toFixed(0)]
+                                console.log(self.styleObj1.color)
+                        }, 200)
+                        self.setIntervalId = setIntervalId
+                    }
+
+
+                    // console.log(msg)
+                },
+                stop(){
+                    console.log('停下来');
+                    clearInterval(this.setIntervalId);
+                    this.setIntervalId = null
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>
