@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>简易计算器</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" value="number1" v-model="num1">
+        <select name="" id="" v-model="opt">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <input type="text" value="number2" v-model="num2">
+        <input type="button" value="=" v-on:click="caculate">
+        <input type="text" value="result" v-model="num3">
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                num1: '0',
+                num2: '0',
+                num3: '0',
+                opt: '+'
+            },
+            methods: {
+                caculate() {
+                    console.log('等于');
+                    switch (this.opt) {
+                        case '+':
+                            this.num3 = +(this.num1) + +(this.num2)
+                            break;
+                        case '-':
+                            this.num3 = +(this.num1) - +(this.num2)
+                            break;
+                        case '*':
+                            this.num3 = +(this.num1) * +(this.num2)
+                            break;
+                        case '/':
+                            this.num3 = +(this.num1) / +(this.num2)
+                            break;
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
